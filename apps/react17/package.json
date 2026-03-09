@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack serve --config config/webpack.dev.js",
+    "dev": "cross-env NODE_ENV=development webpack serve --config config/webpack.dev.js --port 8017",
     "build": "cross-env NODE_ENV=production webpack --config config/webpack.prod.js",
     "serve": "npx --yes serve dist -l 8080",
     "build:analyze": "cross-env NODE_ENV=production ANALYZE=true SOURCE_MAP=true webpack --config config/webpack.prod.js",
