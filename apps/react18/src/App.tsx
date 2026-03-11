@@ -1,7 +1,23 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 
 const App = () => {
   const [count, setCount] = useState(0);
+  const [clickUser, setClickUser] = useState("");
+
+  useEffect(() => {
+    window.$wujie?.bus.$on("sub-bus", setClickUser);
+    return () => window.$wujie?.bus.$off("sub-bus", setClickUser);
+  }, []);
+
+  const handleIncrement = () => {
+    setCount((prev) => {
+      const next = prev + 1;
+      window.$wujie?.bus.$emit("sub-bus", `Hello from React 18! Count: ${next}`);
+      return next;
+    });
+  };
+
+  console.log("[clickUser]", clickUser);
 
   return (
     <div className="min-h-screen bg-gray-50 px-4 py-12">
@@ -13,7 +29,7 @@ const App = () => {
             Count: <span className="text-brand-500 font-bold">{count}</span>
           </p>
           <div className="flex gap-4">
-            <button onClick={() => setCount((c) => c + 1)} className="btn-primary">
+            <button onClick={handleIncrement} className="btn-primary">
               Increment
             </button>
             Button

@@ -31,15 +31,24 @@ function Home() {
   );
 }
 
-function SubApp({ name, url }: { name: string; url: string }) {
+function SubApp({ name, url, mainKey }: { name: string; url: string; mainKey: string }) {
   return (
     <div style={{ width: "100%", height: "100%" }}>
-      <WujieReact width="100%" height="100%" name={name} url={url} sync={true} />
+      <WujieReact
+        width="100%"
+        height="100%"
+        name={name}
+        url={url}
+        sync={true}
+        props={{ mainKey }}
+      />
     </div>
   );
 }
 
 function Layout() {
+  const mainKey: string = `${Math.random()}`.replace(/\d\./g, "");
+
   return (
     <div style={{ display: "flex", height: "100vh", width: "100vw" }}>
       <div
@@ -69,7 +78,7 @@ function Layout() {
             <Route
               key={app.name}
               path={`/${app.name}/*`}
-              element={<SubApp name={app.name} url={app.url} />}
+              element={<SubApp name={app.name} url={app.url} mainKey={mainKey} />}
             />
           ))}
         </Routes>

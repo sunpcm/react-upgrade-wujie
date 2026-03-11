@@ -1,13 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const App = () => {
   const [count, setCount] = useState(0);
+  const [clicker, setClicker] = useState("");
+
+  useEffect(() => {
+    window.$wujie?.bus.$on("sub-bus", setClicker);
+    return () => window.$wujie?.bus.$off("sub-bus", setClicker);
+  }, []);
+
+  console.log("[clicker]", clicker);
 
   return (
     <div className="min-h-screen bg-gray-50 px-4 py-12">
       <div className="mx-auto max-w-3xl">
         <h1 className="text-brand-600 mb-8 text-4xl font-bold">Hello React 19</h1>
-
         <div className="mb-6 rounded-lg bg-white p-6 shadow-md">
           <p className="mb-4 text-lg">
             Count: <span className="text-brand-500 font-bold">{count}</span>
@@ -19,7 +26,7 @@ const App = () => {
             Button
           </div>
         </div>
-
+        {clicker}
         <div className="prose prose-brand">
           <h2>Tailwind Classes Working!</h2>
           <ul>

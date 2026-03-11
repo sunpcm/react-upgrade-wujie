@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 const App = () => {
   const [count, setCount] = useState(0);
+  const mainKey = window.$wujie?.props?.mainKey;
 
   return (
     <div className="min-h-screen bg-gray-50 px-4 py-12">
@@ -19,6 +20,8 @@ const App = () => {
             Button
           </div>
         </div>
+
+        <div>Mian Key: {mainKey}</div>
 
         <div className="prose prose-brand">
           <h2>Tailwind Classes Working!</h2>

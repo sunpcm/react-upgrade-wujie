@@ -29,5 +29,6 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "eslint.workingDirectories": [{ "pattern": "apps/*" }, { "pattern": "packages/*" }],
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"]
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "cSpell.words": ["Wujie"]
 }
