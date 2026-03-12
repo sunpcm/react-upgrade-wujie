@@ -1,23 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useWujieEvent } from "@biu/wujie-hooks";
 
 const App = () => {
   const [count, setCount] = useState(0);
-  const [clickUser, setClickUser] = useState("");
+  const [message, setMessage] = useState("");
 
-  useEffect(() => {
-    window.$wujie?.bus.$on("sub-bus", setClickUser);
-    return () => window.$wujie?.bus.$off("sub-bus", setClickUser);
-  }, []);
-
-  const handleIncrement = () => {
-    setCount((prev) => {
-      const next = prev + 1;
-      window.$wujie?.bus.$emit("sub-bus", `Hello from React 18! Count: ${next}`);
-      return next;
-    });
-  };
-
-  console.log("[clickUser]", clickUser);
+  useWujieEvent("Echo", (message: string) => setMessage(message));
 
   return (
     <div className="min-h-screen bg-gray-50 px-4 py-12">
@@ -29,12 +17,14 @@ const App = () => {
             Count: <span className="text-brand-500 font-bold">{count}</span>
           </p>
           <div className="flex gap-4">
-            <button onClick={handleIncrement} className="btn-primary">
+            <button onClick={() => setCount((prev) => prev + 1)} className="btn-primary">
               Increment
             </button>
             Button
           </div>
         </div>
+
+        {message}
 
         <div className="prose prose-brand">
           <h2>Tailwind Classes Working!</h2>

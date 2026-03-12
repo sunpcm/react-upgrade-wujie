@@ -6,8 +6,8 @@
   "types": "index.ts",
   "exports": {
     ".": {
-      "types": "./index.tsx",
-      "default": "./index.tsx"
+      "types": "./index.ts",
+      "default": "./index.ts"
     }
   },
   "scripts": {
@@ -25,5 +25,8 @@
   "prettier": "@biu/prettier-config",
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@babel/runtime": "^7.28.6"
+  }
 }

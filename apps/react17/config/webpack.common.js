@@ -22,9 +22,8 @@ module.exports = {
           // 本项目源码 (当前目录是 build，往上两级找到 src)
           path.resolve(__dirname, "../src"),
 
-          // 共享组件库源码
-          // 路径逻辑：build -> webpack-app -> apps -> my-monorepo -> packages -> ui-lib
-          path.resolve(__dirname, "../../../packages/ui-lib"),
+          // 所有共享包源码（新增 package 无需再改此处）
+          path.resolve(__dirname, "../../../packages"),
         ],
         use: [
           {

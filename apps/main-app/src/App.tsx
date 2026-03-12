@@ -1,8 +1,9 @@
-import React from "react";
+import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import WujieReact from "wujie-react";
+import { Home } from "./Home";
 
-const { setupApp, preloadApp } = WujieReact;
+const { setupApp, preloadApp, bus } = WujieReact;
 
 const subApps = [
   { name: "react168", url: "http://localhost:8168/" },
@@ -22,15 +23,6 @@ subApps.forEach((app) => {
   preloadApp({ name: app.name, url: app.url });
 });
 
-function Home() {
-  return (
-    <div>
-      <h2>Welcome to Micro Frontend Main App</h2>
-      <p>Please select a sub-app from the sidebar.</p>
-    </div>
-  );
-}
-
 function SubApp({ name, url, mainKey }: { name: string; url: string; mainKey: string }) {
   return (
     <div style={{ width: "100%", height: "100%" }}>
@@ -47,7 +39,16 @@ function SubApp({ name, url, mainKey }: { name: string; url: string; mainKey: st
 }
 
 function Layout() {
-  const mainKey: string = `${Math.random()}`.replace(/\d\./g, "");
+  const randomKey = Math.random();
+  const mainKey: string = `${randomKey}`.replace(/\d\./g, "");
+
+  useEffect(() => {
+    if (randomKey > 0.5) {
+      bus.$emit("Echo", mainKey);
+    } else {
+      bus.$emit("Echo");
+    }
+  }, [mainKey, randomKey]);
 
   return (
     <div style={{ display: "flex", height: "100vh", width: "100vw" }}>

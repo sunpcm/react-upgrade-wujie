@@ -20,6 +20,7 @@
     "@biu/postcss-config": "workspace:*",
     "@biu/tsconfig": "workspace:*",
     "@biu/tailwind-config": "workspace:*",
+    "@biu/wujie-hooks": "workspace:*",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
