@@ -43,11 +43,21 @@ function Layout() {
   const mainKey: string = `${randomKey}`.replace(/\d\./g, "");
 
   useEffect(() => {
+    const handleReact18Ready = () => {
+      bus.$emit("Echo", mainKey);
+    };
+
+    bus.$on("react18-ready", handleReact18Ready);
+
+    return () => {
+      bus.$off("react18-ready", handleReact18Ready);
+    };
+  }, [mainKey]);
+
+  useEffect(() => {
     if (randomKey > 0.5) {
-      console.log("[1112]", 1112);
       setTimeout(() => {
-        console.log("[1113]", 1113);
-        bus.$emit("Echo", mainKey);
+        bus.$emit("Echo", mainKey + "000000");
       }, 2000);
     } else {
       bus.$emit("Echo");

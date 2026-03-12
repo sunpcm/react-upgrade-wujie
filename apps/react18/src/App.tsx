@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useWujieEvent } from "@biu/wujie-hooks";
 
 const App = () => {
@@ -7,11 +7,17 @@ const App = () => {
 
   useWujieEvent("Echo", (message: string) => setMessage(message));
 
+  useEffect(() => {
+    const bus = window.$wujie?.bus;
+    if (bus) {
+      bus.$emit("react18-ready");
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-50 px-4 py-12">
       <div className="mx-auto max-w-3xl">
         <h1 className="text-brand-600 mb-8 text-4xl font-bold">Hello React 18</h1>
-
         <div className="mb-6 rounded-lg bg-white p-6 shadow-md">
           <p className="mb-4 text-lg">
             Count: <span className="text-brand-500 font-bold">{count}</span>
@@ -24,8 +30,6 @@ const App = () => {
           </div>
         </div>
 
-        {message}
-
         <div className="prose prose-brand">
           <h2>Tailwind Classes Working!</h2>
           <ul>
@@ -36,6 +40,7 @@ const App = () => {
         </div>
       </div>
       <div className="bg-brand-500 p-18">测试共享主题</div>
+      message: {message}
     </div>
   );
 };
