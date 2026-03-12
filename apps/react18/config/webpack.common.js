@@ -10,6 +10,13 @@ module.exports = {
   // 告诉 Webpack 如何寻找模块
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
+    // 强制所有 workspace 包里的 zustand / react 引用都解析到本应用的 node_modules。
+    // 避免 pnpm 软链到绑定 react@19 的 zustand 实例，导致 useCallback 读取到 null dispatcher。
+    alias: {
+      zustand: path.resolve(__dirname, "../node_modules/zustand"),
+      react: path.resolve(__dirname, "../node_modules/react"),
+      "react-dom": path.resolve(__dirname, "../node_modules/react-dom"),
+    },
   },
   // 模块规则 (Module Rules) - 也就是 Loaders
   module: {

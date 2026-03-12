@@ -17,7 +17,7 @@ const cfg = merge(common, {
     port: 8018,
     headers: { "Access-Control-Allow-Origin": "*" }, // 自动选择可用端口（如果 3000 被占用，会自动尝试 3001, 3002...）
     hot: true, // 开启热模块替换 (HMR)
-    open: true, // 启动后自动打开浏览器
+    open: false, // 启动后自动打开浏览器
     compress: true, // 开启 gzip 压缩
     historyApiFallback: true,
     proxy: [

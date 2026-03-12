@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useWujieEvent } from "@biu/wujie-hooks";
+import { AppStore, useAppStore } from "./store";
 
 const App = () => {
-  const [count, setCount] = useState(0);
-  const [message, setMessage] = useState("");
+  const count = useAppStore((state: AppStore) => state.count);
+  const increment = useAppStore((state: AppStore) => state.increment);
+  const message = useAppStore((state: AppStore) => state.message);
+  const setMessage = useAppStore((state: AppStore) => state.setMessage);
 
-  useWujieEvent("Echo", (message: string) => setMessage(message));
+  useWujieEvent("Echo", (msg: string) => setMessage(msg));
 
   useEffect(() => {
     const bus = window.$wujie?.bus;
@@ -23,7 +26,7 @@ const App = () => {
             Count: <span className="text-brand-500 font-bold">{count}</span>
           </p>
           <div className="flex gap-4">
-            <button onClick={() => setCount((prev) => prev + 1)} className="btn-primary">
+            <button onClick={increment} className="btn-primary">
               Increment
             </button>
             Button
