@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import WujieReact from "wujie-react";
 import { Home } from "./Home";
@@ -39,8 +39,8 @@ function SubApp({ name, url, mainKey }: { name: string; url: string; mainKey: st
 }
 
 function Layout() {
-  const randomKey = Math.random();
-  const mainKey: string = `${randomKey}`.replace(/\d\./g, "");
+  const mainKeyRef = useRef(`${Math.random()}`.replace(/\d\./g, ""));
+  const mainKey = mainKeyRef.current;
 
   useEffect(() => {
     const handleReact18Ready = () => {
@@ -53,16 +53,6 @@ function Layout() {
       bus.$off("react18-ready", handleReact18Ready);
     };
   }, [mainKey]);
-
-  useEffect(() => {
-    if (randomKey > 0.5) {
-      setTimeout(() => {
-        bus.$emit("Echo", mainKey + "000000");
-      }, 2000);
-    } else {
-      bus.$emit("Echo");
-    }
-  }, [mainKey, randomKey]);
 
   return (
     <div style={{ display: "flex", height: "100vh", width: "100vw" }}>
