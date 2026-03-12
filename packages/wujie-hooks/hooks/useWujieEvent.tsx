@@ -1,6 +1,4 @@
 import { useEffect, useLayoutEffect, useRef } from "react";
-// 可选：如果你想让基座也能用这个 Hook，把主应用的 bus 引入进来
-// import wujie from 'wujie';
 
 /**
  * 安全使用无界 EventBus 的自定义 Hook (支持主/子应用兼容及泛型)
@@ -21,9 +19,6 @@ export function useWujieEvent<T extends any[]>(eventName: string, callback: (...
       callbackRef.current(...(args as T));
     };
 
-    // 优化 2：兼容获取 Bus 的逻辑
-    // 优先尝试获取子应用注入的 bus，如果获取不到，尝试获取主应用 import 的 bus
-    // const bus = window.$wujie?.bus || wujie.bus;
     const bus = window.$wujie?.bus;
 
     if (bus) {

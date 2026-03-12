@@ -1,1 +1,1 @@
-/// <reference types="@biu/tsconfig/wujie.d.ts" />
+/// <reference types="@biu/tsconfig" />

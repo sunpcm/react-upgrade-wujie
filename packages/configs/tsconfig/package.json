@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.json",
+  "types": "./wujie.d.ts",
   "scripts": {
     "test": "echo \"(@biu/tsconfig) no tests\""
   },

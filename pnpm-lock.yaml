@@ -55,6 +55,9 @@ importers:
       "@biu/prettier-config":
         specifier: workspace:*
         version: link:packages/configs/prettier-config
+      "@biu/tsconfig":
+        specifier: workspace:*
+        version: link:packages/configs/tsconfig
       "@changesets/cli":
         specifier: ^2.29.8
         version: 2.29.8(@types/node@25.0.9)

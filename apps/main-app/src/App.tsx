@@ -44,7 +44,11 @@ function Layout() {
 
   useEffect(() => {
     if (randomKey > 0.5) {
-      bus.$emit("Echo", mainKey);
+      console.log("[1112]", 1112);
+      setTimeout(() => {
+        console.log("[1113]", 1113);
+        bus.$emit("Echo", mainKey);
+      }, 2000);
     } else {
       bus.$emit("Echo");
     }
