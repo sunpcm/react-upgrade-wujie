@@ -44,7 +44,7 @@ function Layout() {
 
   useEffect(() => {
     const handleReact18Ready = () => {
-      bus.$emit("Echo", mainKey);
+      bus.$emit("Echo", "From main  " + mainKey);
     };
 
     bus.$on("react18-ready", handleReact18Ready);
