@@ -1,15 +1,30 @@
-import React, { useState, useEffect } from "react";
+import { useState, lazy, Suspense, useTransition } from "react";
+
+const LazyHeavyChart = lazy(() => {
+  return Promise.all([
+    import("@biu/util-components"),
+    new Promise((resolve) => {
+      setTimeout(() => {
+        return resolve(1);
+      }, 4000);
+    }),
+  ]).then(([modules]) => {
+    return {
+      default: modules.HeavyChart,
+    };
+  });
+});
 
 const App = () => {
   const [count, setCount] = useState(0);
-  const [clicker, setClicker] = useState("");
+  const [showChart, setShowChart] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
-  useEffect(() => {
-    window.$wujie?.bus.$on("sub-bus", setClicker);
-    return () => window.$wujie?.bus.$off("sub-bus", setClicker);
-  }, []);
-
-  console.log("[clicker]", clicker);
+  const handleToggleChart = () => {
+    startTransition(() => {
+      setShowChart((prev) => !prev);
+    });
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 px-4 py-12">
@@ -23,10 +38,19 @@ const App = () => {
             <button onClick={() => setCount((c) => c + 1)} className="btn-primary">
               Increment
             </button>
-            Button
+            <button onClick={handleToggleChart} className="btn-primary">
+              Heavy Chart
+            </button>
           </div>
+          {isPending ? "后台正在爆闪下载图表中..." : "Heavy Chart (Transition 版本)"}
         </div>
-        {clicker}
+        {showChart && (
+          <div>
+            <Suspense fallback={<div>Loading 19...</div>}>
+              <LazyHeavyChart />
+            </Suspense>
+          </div>
+        )}
         <div className="prose prose-brand">
           <h2>Tailwind Classes Working!</h2>
           <ul>

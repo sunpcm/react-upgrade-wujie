@@ -1,8 +1,20 @@
-import React, { useState } from "react";
-import { HeavyChart } from "@biu/util-components";
+import React, { useState, lazy, Suspense } from "react";
+
+const LazyHeavyChart: any = lazy(() => {
+  return Promise.all([
+    import("@biu/util-components"),
+    new Promise((resolve) => {
+      // 模拟网络延迟，确保加载状态能被观察到
+      setTimeout(resolve, 4000);
+    }),
+  ]).then(([module]) => ({
+    default: module.HeavyChart,
+  }));
+});
 
 const App = () => {
   const [count, setCount] = useState(0);
+  const [showChart, setShowChart] = useState(false);
 
   return (
     <div className="min-h-screen bg-gray-50 px-4 py-12">
@@ -17,13 +29,22 @@ const App = () => {
             <button onClick={() => setCount((c) => c + 1)} className="btn-primary">
               Increment
             </button>
-            Button
+            <button onClick={() => setShowChart(!showChart)} className="btn-primary">
+              Heavy Chart
+            </button>
           </div>
         </div>
 
-        <div>
-          <HeavyChart />
-        </div>
+        <div></div>
+
+        {showChart && (
+          <div>
+            {/* @ts-expect-error eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+            <Suspense fallback={<div>正在请求核心数据，请稍候...</div>}>
+              <LazyHeavyChart />
+            </Suspense>
+          </div>
+        )}
 
         <div className="prose prose-brand">
           <h2>Tailwind Classes Working!</h2>
