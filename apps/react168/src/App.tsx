@@ -12,9 +12,22 @@ const LazyHeavyChart: any = lazy(() => {
   }));
 });
 
+const LightDashboard = () => (
+  <div style={{ padding: 24, border: "2px dashed #ddd", borderRadius: 8, marginTop: 20 }}>
+    <h3>📊 轻量级占位面板 (瞬间渲染)</h3>
+    <p>仔细看！点击 切换重型图表 后，这个面板**不会**立刻变成难看的 Loading 图标。</p>
+    <p>
+      React 会让这个旧视图在屏幕上等待，甚至这个时候你还能去点上面的 Increment
+      按钮，主线程完全不卡！等到4秒后组件下载完毕，才平滑替换掉这块区域。
+    </p>
+  </div>
+);
+
 const App = () => {
   const [count, setCount] = useState(0);
-  const [showChart, setShowChart] = useState(false);
+  const [tab, setTab] = useState<"light" | "heavy">("light");
+
+  console.log("[tab]", tab);
 
   return (
     <div className="min-h-screen bg-gray-50 px-4 py-12">
@@ -29,22 +42,29 @@ const App = () => {
             <button onClick={() => setCount((c) => c + 1)} className="btn-primary">
               Increment
             </button>
-            <button onClick={() => setShowChart(!showChart)} className="btn-primary">
-              Heavy Chart
+            <button
+              onClick={() => setTab("light")}
+              className="btn-primary"
+              style={{ opacity: tab === "light" ? 0.5 : 1 }}
+            >
+              轻量面板
+            </button>
+            <button onClick={() => setTab("heavy")} className="btn-primary">
+              加载重型图表 (4秒)
             </button>
           </div>
         </div>
 
         <div></div>
 
-        {showChart && (
-          <div>
-            {/* @ts-expect-error eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-            <Suspense fallback={<div>正在请求核心数据，请稍候...</div>}>
-              <LazyHeavyChart />
-            </Suspense>
-          </div>
-        )}
+        <div>
+          {/* @ts-expect-error eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+          <Suspense
+            fallback={<div style={{ padding: "20px", color: "red" }}>我是 fallback loading</div>}
+          >
+            {tab === "light" ? <LightDashboard /> : <LazyHeavyChart />}
+          </Suspense>
+        </div>
 
         <div className="prose prose-brand">
           <h2>Tailwind Classes Working!</h2>
