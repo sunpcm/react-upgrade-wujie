@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { HeavyChart } from "@biu/util-components";
 
 const App = () => {
   const [count, setCount] = useState(0);
@@ -18,6 +19,10 @@ const App = () => {
             </button>
             Button
           </div>
+        </div>
+
+        <div>
+          <HeavyChart />
         </div>
 
         <div className="prose prose-brand">

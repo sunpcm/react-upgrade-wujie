@@ -85,9 +85,18 @@ importers:
 
   apps/main-app:
     dependencies:
+      "@babel/runtime":
+        specifier: ^7.28.6
+        version: 7.28.6
+      "@biu/util-components":
+        specifier: workspace:*
+        version: link:../../packages/util-components
       "@biu/wujie-hooks":
         specifier: workspace:*
         version: link:../../packages/wujie-hooks
+      core-js:
+        specifier: ^3.45.1
+        version: 3.48.0
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -134,9 +143,15 @@ importers:
       "@biu/tsconfig":
         specifier: workspace:*
         version: link:../../packages/configs/tsconfig
+      "@biu/util-components":
+        specifier: workspace:*
+        version: link:../../packages/util-components
       "@biu/wujie-hooks":
         specifier: workspace:*
         version: link:../../packages/wujie-hooks
+      core-js:
+        specifier: ^3.45.1
+        version: 3.48.0
       react:
         specifier: ^16.8.6
         version: 16.14.0
@@ -258,9 +273,15 @@ importers:
       "@biu/tsconfig":
         specifier: workspace:*
         version: link:../../packages/configs/tsconfig
+      "@biu/util-components":
+        specifier: workspace:*
+        version: link:../../packages/util-components
       "@biu/wujie-hooks":
         specifier: workspace:*
         version: link:../../packages/wujie-hooks
+      core-js:
+        specifier: ^3.45.1
+        version: 3.48.0
       react:
         specifier: ^17.0.2
         version: 17.0.2
@@ -385,6 +406,9 @@ importers:
       "@biu/tsconfig":
         specifier: workspace:*
         version: link:../../packages/configs/tsconfig
+      "@biu/util-components":
+        specifier: workspace:*
+        version: link:../../packages/util-components
       "@biu/wujie-hooks":
         specifier: workspace:*
         version: link:../../packages/wujie-hooks
@@ -524,9 +548,15 @@ importers:
       "@biu/tsconfig":
         specifier: workspace:*
         version: link:../../packages/configs/tsconfig
+      "@biu/util-components":
+        specifier: workspace:*
+        version: link:../../packages/util-components
       "@biu/wujie-hooks":
         specifier: workspace:*
         version: link:../../packages/wujie-hooks
+      core-js:
+        specifier: ^3.45.1
+        version: 3.48.0
       react:
         specifier: ^19.0.0
         version: 19.2.3
@@ -708,6 +738,18 @@ importers:
         version: 25.0.9
 
   packages/ui-lib:
+    devDependencies:
+      "@types/react":
+        specifier: ^18.3.12
+        version: 18.3.27
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
+
+  packages/util-components:
     devDependencies:
       "@types/react":
         specifier: ^18.3.12

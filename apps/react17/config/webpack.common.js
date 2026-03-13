@@ -10,6 +10,12 @@ module.exports = {
   // 告诉 Webpack 如何寻找模块
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
+    alias: {
+      "core-js": path.resolve(__dirname, "../node_modules/core-js"),
+      "@babel/runtime": path.resolve(__dirname, "../node_modules/@babel/runtime"),
+      react: path.resolve(__dirname, "../node_modules/react"),
+      "react-dom": path.resolve(__dirname, "../node_modules/react-dom"),
+    },
   },
   // 模块规则 (Module Rules) - 也就是 Loaders
   module: {

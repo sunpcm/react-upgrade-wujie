@@ -20,9 +20,11 @@
     "@biu/postcss-config": "workspace:*",
     "@biu/tailwind-config": "workspace:*",
     "@biu/tsconfig": "workspace:*",
+    "@biu/util-components": "workspace:*",
     "@biu/wujie-hooks": "workspace:*",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "core-js": "^3.45.1"
   },
   "devDependencies": {
     "@babel/core": "^7.28.5",

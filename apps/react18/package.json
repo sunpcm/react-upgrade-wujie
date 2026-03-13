@@ -21,6 +21,7 @@
     "@biu/store-utils": "workspace:*",
     "@biu/tailwind-config": "workspace:*",
     "@biu/tsconfig": "workspace:*",
+    "@biu/util-components": "workspace:*",
     "@biu/wujie-hooks": "workspace:*",
     "core-js": "^3.48.0",
     "immer": "^10.1.3",

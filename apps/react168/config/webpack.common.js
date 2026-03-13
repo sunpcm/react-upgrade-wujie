@@ -10,6 +10,16 @@ module.exports = {
   // 告诉 Webpack 如何寻找模块
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
+    alias: {
+      // 强制所有注入的 polyfill 和 helper 都从本应用的 node_modules 寻找，
+      // 从而允许 workspace 的内部包保持纯净，不再需要单独安装 core-js 等运行时依赖
+      "core-js": path.resolve(__dirname, "../node_modules/core-js"),
+      "@babel/runtime": path.resolve(__dirname, "../node_modules/@babel/runtime"),
+      // 解决多版本 React 冲突："Invalid hook call"
+      // 内部包可能安装了高版本 React 的 devDependencies，强制内部包全解析到本应用的 react
+      react: path.resolve(__dirname, "../node_modules/react"),
+      "react-dom": path.resolve(__dirname, "../node_modules/react-dom"),
+    },
   },
   // 模块规则 (Module Rules) - 也就是 Loaders
   module: {
